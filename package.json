@@ -1,0 +1,15 @@
+{
+  "name": "crm-team",
+  "version": "1.0.0",
+  "description": "小康CRM团队版 · 账号登录 + 云端同步 + 每日自动备份",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.13"
+  }
+}
