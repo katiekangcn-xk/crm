@@ -5,18 +5,25 @@ const Auth = {
   user: null,
 
   /* ---------- 启动入口：先登录，再初始化 CRM ---------- */
-  async boot() {
+   async boot() {
+    this.showLogin();
     try {
-      const r = await fetch('/api/me');
-      if (r.status === 503) { this.dbDown = true; }
-      else { const j = await r.json(); this.user = j.user; }
-    } catch (e) { this.user = null; }
-    if (this.user) {
-      await this.startCRM();
-    } else {
-      this.showLogin();
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 8000);
+      const r = await fetch('/api/me', { signal: ctrl.signal });
+      clearTimeout(timer);
+      if (r.status === 503) { this.dbDown = true; this.showLogin(); return; }
+      const j = await r.json();
+      this.user = j.user;
+      if (this.user) {
+        await this.startCRM();
+      } else {
+        this.showLogin();
+      }
+    } catch (e) {
     }
   },
+
 
   async startCRM() {
     // 登录成功：拉云端数据 → 初始化 DB → 启动主应用
