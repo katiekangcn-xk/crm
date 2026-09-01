@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小康CRM · 外贸客户管理系统</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">康</div>
+      <div class="brand-text">
+        <h1>小康 CRM</h1>
+        <span>外贸客户管理系统</span>
+      </div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="sidebar-foot">
+      <div id="whoami" style="font-size:.72rem;color:#9aa0ab;padding:0 .2rem .4rem;text-overflow:ellipsis;overflow:hidden;white-space:nowrap"></div>
+      <button class="btn ghost sm" id="btn-export">导出数据</button>
+      <button class="btn ghost sm" id="btn-import">导入数据</button>
+      <button class="btn ghost sm" id="btn-backups">我的备份</button>
+      <button class="btn ghost sm" id="btn-admin">系统设置</button>
+      <button class="btn danger sm" id="btn-logout">退出登录</button>
+      <input type="file" id="file-import" accept=".json" hidden>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+      <div class="crumb" id="crumb">仪表盘</div>
+      <div class="topbar-right">
+        <div class="clock" id="clock">--:--:--</div>
+        <div class="date" id="today"></div>
+      </div>
+    </header>
+    <section class="content" id="view"></section>
+  </main>
+</div>
+<div class="modal-mask" id="modal-mask">
+  <div class="modal" id="modal">
+    <div class="modal-head"><h3 id="modal-title">编辑</h3><button class="modal-close" id="modal-close">×</button></div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-foot" id="modal-foot"></div>
+  </div>
+</div>
+<div class="toast-wrap" id="toast-wrap"></div>
+<script src="app.js"></script>
+
+<script src="qfiles.js"></script>
+<script src="auth.js"></script>
+<div class="auth-mask" id="auth-mask">
+  <div class="auth-card" id="auth-box"></div>
+</div>
+<script>Auth.boot();</script>
+</body>
+</html>
