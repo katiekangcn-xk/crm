@@ -58,7 +58,6 @@ function parseBody(req) {
   });
 }
 function getCookie(req, name) {
-  const m = /(?:^|;\s*)([^=]+)=([^;]*)/.exec('');
   const raw = req.headers.cookie || '';
   for (const part of raw.split(';')) {
     const [k, ...v] = part.trim().split('=');
@@ -66,6 +65,7 @@ function getCookie(req, name) {
   }
   return null;
 }
+
 
 /* ---------- 会话 ---------- */
 async function createSession(res, userId) {
